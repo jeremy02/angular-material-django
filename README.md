@@ -95,12 +95,15 @@ C. Running the FFS app
     While still in your work folder, run the following command in the console application:
     gulp serve
 
-    And that's it. Gulp will take care everything and start the web app and the django application inside the folder called flexcomm. Your default browser will be opened automatically, and you will be able to navigate through the web app.
+    And that's it. Gulp will take care everything and start the web app and the django application inside the folder called flexcomm. Your default browser will be opened automatically, and you will be able to navigate through the web app Make sure the following ports are open 8000,8001,3001 and 3001.
+    You can delete the sqlitedb file and start with your inside flexcomm folder and run (python manage.py syc db to create your own db file and start with fresh data).
 #to be done
 token authentication to replace the django login decorators
 implement actual logout of a user
 use of django rest framework instead of the DjangoJSONEncoder Django’s serialization framework which translates Django models into other formats(json/xml) to achieve a better REST API
 
 fOR NOW we are using PyJWT for JSON Web authentication nd its performing the encoding but we have to implementing the decoding of user uthentication data on the django back end.
+
+Actual implementation of the delete buttons and functions.
 
 
