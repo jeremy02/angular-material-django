@@ -50,12 +50,12 @@ Here you can find a list of core libraries, design specifications and coding sta
     
     
 #Prerequisites
-Yeoman generator for AngularJS with GulpJS
-Node.js
-Git
-Bower
-Gulp
-Django
+    -Yeoman generator for AngularJS with GulpJS
+   - Node.js
+    -Git
+    -Bower
+    -Gulp
+    -Django
 
 #Installation
 A. Installing Prerequisites
@@ -90,7 +90,7 @@ B. Installing Fuse
 
     And now, you are ready to run the web app for the first time.
 
-C. Running Fuse
+C. Running the FFS app
 
     While still in your work folder, run the following command in the console application:
     gulp serve
