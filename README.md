@@ -59,15 +59,18 @@ A. Installing Prerequisites
 
     npm install -g gulp
 
-Now you are ready to install the Fuse.
-B. Installing Fuse
-    Unzip the zip file that you have downloaded from this git. Inside the zip file, you will find the Skeleton Project (src.zip).
-    Extract the contents of the zip file (src.zip) into a folder that you will work within. For this documentation, we will refer that as "your work folder".
+Now you are ready to install the FFS app.
+B. Installing FFS
+    Unzip the zip file that you have downloaded from this git. Inside the zip file, you will find the Skeleton Project (angular-material-django.zip).
+    
+    Extract the contents of the zip file (angular-material-django.zip) into a folder that you will work within. For this documentation, we will refer that as "your work folder".
+    
     Open your favorite console application (Terminal, Command Prompt etc.), navigate into your work folder, run the following command and wait for it to finish:
     
     npm install
 
-    npm install
+    cd angular-material-django/src 
+    npm install  
 
     NB:This command will install all the required Node.js modules into the node_modules directory inside your work folder.You may have to delete the folder called node-modules.
 
