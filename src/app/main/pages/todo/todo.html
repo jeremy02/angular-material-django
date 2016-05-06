@@ -1,0 +1,96 @@
+<div id="todo" class="page-layout carded left-sidenav" layout="row">
+
+    <!-- TOP BACKGROUND -->
+    <div class="top-bg md-accent-bg"></div>
+    <!-- / TOP BACKGROUND -->
+
+    <!-- LEFT SIDENAV -->
+    <md-sidenav ng-hide="currentUser ==''" class="sidenav" md-is-locked-open="$mdMedia('gt-md')" md-component-id="main-sidenav"
+                ng-include="'app/main/pages/todo/sidenavs/main/main-sidenav.html'" ms-scroll ms-sidenav-helper>
+    </md-sidenav>
+    <!-- / LEFT SIDENAV -->
+
+    <!-- CENTER -->
+    <div ng-hide="currentUser ==''" class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="start center">
+            <div class="search-wrapper md-whiteframe-4dp" flex layout="row" layout-align="start center">
+
+                <md-button class="md-icon-button sidenav-toggle" ng-click="vm.toggleSidenav('main-sidenav')" hide-gt-md
+                           aria-label="Toggle sidenav" translate translate-attr-aria-label="TASK.TOGGLE_SIDENAV">
+                    <md-icon md-font-icon="icon-menu" class="icon"></md-icon>
+                </md-button>
+
+                <div class="search" flex layout="row" layout-align="start center">
+                    <md-icon md-font-icon="icon-magnify" class="icon s24"></md-icon>
+                    <input flex ng-model="vm.taskFilters.search" type="text" placeholder="Search for a company"
+                           translate
+                           translate-attr-placeholder="TASK.SEARCH">
+                </div>
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+        <!-- CONTENT CARD -->
+        <div class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content" layout="row" flex>
+
+                <!-- Todo list pane -->
+                <md-content class="todo-list-pane" flex
+                            ng-include="'app/main/pages/todo/views/list/list-view.html'" ms-scroll="vm.msScrollOptions">
+                </md-content>
+                <!-- / Todo list pane -->
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARDb-->
+
+    </div>
+    <!-- / CENTER -->
+
+
+    <!-- CENTER -->
+    <div ng-show="currentUser ==''" class="center" layout="column" flex>
+
+        <!-- CONTENT HEADER -->
+        <div class="header" layout="row" layout-align="space-between center">
+            <div class="search-wrapper md-whiteframe-4dp" flex layout="row" layout-align="start center">
+
+                <h3 layout-align="space-between center">PLEASE LOGIN</h3>
+
+            </div>
+        </div>
+        <!-- / CONTENT HEADER -->
+
+
+
+        <!-- CONTENT CARD -->
+        <div ng-show="currentUser ==''"  class="content-card" layout="column" flex>
+
+            <!-- CONTENT -->
+            <div class="content" layout="row" flex>
+
+                <!-- Todo list pane -->
+                <md-content class="todo-list-pane" flex ms-scroll="vm.msScrollOptions">
+
+
+                    <h2>PLEASE LOG IN</h2>
+
+                </md-content>
+                <!-- / Todo list pane -->
+
+            </div>
+            <!-- / CONTENT -->
+
+        </div>
+        <!-- / CONTENT CARDb-->
+
+    </div>
+    <!-- / CENTER -->
+
+</div>

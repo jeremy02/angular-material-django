@@ -1,0 +1,546 @@
+<!-- TASK LIST ITEMS -->
+<div class="todo-items" ng-show="vm.commentsShow" ng-sortable="vm.sortableOptions" ng-model="vm.tasks" ng-class="{'sortable': vm.taskOrder === ''}">
+
+    <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+
+            <div layout="row" layout-align="start center">
+                <md-button class="md-icon-button" aria-label="COMMENTS" >
+                    <md-icon md-font-icon="icon-keyboard-backspace"></md-icon>
+                </md-button>
+                <h4>
+                    <span>{{vm.showCompany}} COMMENTS {{vm.showCompanyNameForFilter}}{{vm.showCompanyIdForFilterDialog}}</span>
+                </h4>
+            </div>
+
+            <div layout="row" layout-align="end center">
+
+                <div class="add-task-button">
+                    <md-button class="md-warn md-raised"  ng-disabled="vm.showCompanyIdForFilterDialog == '' " ng-click="vm.openCommentsDialog($event,'',vm.showCompanyIdForFilterDialog)" aria-label="ADD COMMENT"
+                               translate="TASK.ADD_COMMENT" translate-attr-aria-label="TASK.ADD_COMMENT">
+                        ADD COMMENT
+                    </md-button>
+                </div>
+
+            </div>
+        </div>
+
+    </md-toolbar>
+
+
+
+    <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
+
+         ng-repeat="comment in vm.comments | orderBy:date-added | filter:vm.showCompanyNameForFilter track by $index">
+
+        <div class="handle" ng-click="vm.preventDefault($event)">
+            <md-icon md-font-icon="icon-drag-vertical" class="icon"></md-icon>
+        </div>
+
+
+
+        <div layout="row" layout-align="start center" flex>
+
+            <div class="info" flex>
+                <div class="title">
+                    {{comment.customerFirstname}}&nbsp;{{comment.customerLastname}}
+                </div>
+
+                <div class="notes">
+                    {{comment.comment}}
+                </div>
+
+                <div class="tags" layout="row" layout-align="start center">
+
+                    <div class="tag" layout="row" layout-align="end center">
+                        <div class="tag-color" style="background-color: rgb(244, 67, 54);" ng-style="{'background-color': green}"></div>
+                        <div class="tag-label" ng-click="vm.addCompanyCommentsFilter($event, comment)">{{comment.company__name}}</div>
+                    </div>
+
+                </div>
+
+                <div class="tags" layout="row" layout-align="end center">
+                    <div class="tag" layout="row" layout-align="end center">
+                        <div class="tag-color" style="background-color: rgb(0, 145, 234);" ng-style="{'background-color':'blue' }"></div>
+                        <div class="tag-label">{{comment.date_added|date:'dd-MMM-yyyy hh:mm:a' }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons" layout="row" layout-align="start center">
+
+                <md-menu>
+                    <md-button ng-click="vm.openCommentsDialog($event, comment)" class="md-icon-button" aria-label="More" translate
+                               translate-attr-aria-label="TASK.MORE">
+                        <md-icon md-font-icon="icon-dots-vertical" ng-click="$mdOpenMenu($event)"></md-icon>
+                    </md-button>
+                </md-menu>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- / TASK LIST ITEMS -->
+
+
+<!-- TASK LIST ITEMS -->
+<div class="todo-items" ng-hide="vm.employeesShow" ng-sortable="vm.sortableOptions" ng-model="vm.tasks" ng-class="{'sortable': vm.taskOrder === ''}">
+
+    <!-- WIDGET GROUP -->
+    <div class="widget-group" layout="row" flex="100" layout-wrap>
+
+        <!-- WIDGET 6 -->
+        <ms-widget layout="column" flex="100" flex-gt-sm="50">
+
+            <!-- Front -->
+            <ms-widget-front class="white-bg">
+
+                <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+                    <div class="h3">EMPLOYEES</div>
+                    <div class="pv-16">
+
+
+                        <md-button ng-click="vm.openEmployeeDialog($event)" class="md-icon-button" aria-label="Add Employee" translate
+                                   translate-attr-aria-label="TASK.ADD_EMPLOYEE_DIALOG">
+                            <md-icon md-font-icon="icon-plus"></md-icon>
+                        </md-button>
+
+                    </div>
+                </div>
+
+                <!--<div class="p-16">-->
+
+
+
+                <div class="p-16" layout="row" layout-align="space-between center"
+                     ng-repeat="user in vm.users">
+                    <div ng-if="!user.is_staff || !user.is_superuser">
+                        <div class="h3">{{user.first_name}}&nbsp;{{user.last_name}}</div>
+                        <div>
+                            <span class="secondary-text">{{user.username}}</span>
+                            <span ng-if="user.date_joined">, {{user.date_joined|date:'dd-MMM-yyyy'}}</span>
+                        </div>
+                    </div>
+
+
+                    <md-menu ng-if="!user.is_staff || !user.is_superuser">
+                        <md-button class="md-icon-button" ng-click="$mdOpenMenu()"
+                                   aria-label="more">
+                            <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                        </md-button>
+
+                        <md-menu-content width="3">
+                            <md-menu-item>
+                                <md-button ng-click="vm.openEmployeeDialog($event, user)" aria-label="More information">
+                                    Edit/Delete
+                                </md-button>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <md-button ng-click="vm.assignToCompanyForm($event, user)" aria-label="Assign Company">
+                                    Assign Company
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+
+                </div>
+
+
+
+            </ms-widget-front>
+            <!-- / Front -->
+
+        </ms-widget>
+        <!-- / WIDGET 6 -->
+
+        <!-- WIDGET 7 -->
+        <ms-widget layout="column" flex="100" flex-gt-sm="50">
+
+            <!-- Front -->
+            <ms-widget-front class="white-bg">
+
+                <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+                    <div class="h3">Assign {{vm.employeeAssignFormData.employeeUsername}} to a Company</div>
+
+                    <div class="pv-16">
+
+
+                    </div>
+                </div>
+
+                <div class="p-16">
+                    <md-content layout-padding="" layout="column">
+
+                        <form ng-if="vm.employeeAssignFormData.employeeId != '' " ng-submit="$event.preventDefault()" name="employeeAssignForm" class="md-inline-form" novalidate>
+
+
+                            <md-input-container class="md-block">
+                                <label translate="TASK.USERNAME">Username</label>
+                                <input name="employeeUsername" ng-model="vm.employeeAssignFormData.employeeUsername" ng-disabled="true" autocomplete="off" required>
+                            </md-input-container>
+
+                            <md-autocomplete ng-disabled="vm.isDisabled" md-no-cache="vm.noCache" md-selected-item="vm.selectedItem" md-search-text-change="vm.searchTextChange(vm.searchText)" md-search-text="vm.searchText" md-selected-item-change="vm.selectedItemChange(item)" md-items="item in vm.querySearch(vm.searchText)" md-item-text="item.name" md-min-length="0" placeholder="Pick a Company" md-menu-class="autocomplete-custom-template">
+                                <md-item-template> <span class="item-title">
+                                    <span class="item-title">
+                                        <md-icon md-svg-icon="img/icons/octicon-repo.svg"></md-icon>
+                                        <span> {{item.name}} </span>
+                                    </span>
+                                    <!--<span class="item-metadata">
+                                        <span class="item-metastat">
+                                            <strong>{{item.tagline}}</strong>
+                                        </span>
+                                        <span class="item-metastat">
+                                            <strong>{{item.date_added|date:'dd-MMM-yyyy'}}</strong>
+                                        </span>
+                                    </span>-->
+                                </md-item-template>
+                            </md-autocomplete>
+
+                            <md-input-container class="md-block" ng-hide="true">
+                                <label>User Id</label>
+                                <input name="employeeId" ng-model="vm.employeeAssignFormData.employeeId" autocomplete="off" required>
+                            </md-input-container>
+
+                            <md-input-container class="md-block" ng-hide="true">
+                                <label>Company Id</label>
+                                <input name="companyId" ng-model="vm.employeeAssignFormData.companyId" autocomplete="off" required>
+                            </md-input-container>
+
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <div layout="row" layout-align="space-between center">
+                                <div layout="row" layout-align="start center">
+
+                                </div>
+
+                                <div layout="row">
+
+                                    <md-button type="submit" ng-click="vm.assignEmployee()"
+                                               class="send-button md-accent md-raised"
+                                               ng-disabled="employeeAssignForm.$invalid || employeeAssignForm.$pristine"
+                                               aria-label="Assign Employee" translate="TASK.ASSIGN_EMPLOYEE" translate-attr-aria-label="TASK.ASSIGN_EMPLOYEE">
+                                        ASSIGN EMPLOYEE
+                                    </md-button>
+
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </md-content>
+                </div>
+
+            </ms-widget-front>
+            <!-- / Front -->
+
+        </ms-widget>
+        <!-- / WIDGET 7 -->
+
+    </div>
+    <!-- / WIDGET GROUP -->
+
+</div>
+<!-- / TASK LIST ITEMS -->
+
+<!-- TASK LIST ITEMS -->
+<div class="todo-items" ng-hide="vm.companiesShow" ng-sortable="vm.sortableOptions" ng-model="vm.tasks" ng-class="{'sortable': vm.taskOrder === ''}">
+
+    <md-toolbar class="md-accent">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+
+            <div layout="row" layout-align="start center">
+                <md-button class="md-icon-button" aria-label="COMPANIES">
+                    <md-icon md-font-icon="icon-keyboard-backspace"></md-icon>
+                </md-button>
+                <h4>
+                    <span>COMPANIES MANAGEMENT</span>
+                </h4>
+            </div>
+
+            <div layout="row" layout-align="end center">
+
+                <div class="add-task-button">
+                    <md-button class="md-accent md-raised" ng-disabled="!currentUser.is_staff" ng-click="vm.openCompanyDialog($event)" aria-label="ADD COMPANY"
+                               translate="TASK.ADD_COMPANY" translate-attr-aria-label="TASK.ADD_TASK">
+                        ADD COMPANY
+                    </md-button>
+                </div>
+
+
+            </div>
+        </div>
+
+    </md-toolbar>
+
+
+    <!-- WIDGET GROUP -->
+    <div class="widget-group" layout="row" flex="100" layout-wrap ng-init="downloadSource = vm.streamingSource">
+
+        <!-- WIDGET 6 -->
+        <ms-widget layout="column" flex="100" flex-gt-sm="50">
+
+            <!-- Front -->
+            <ms-widget-front class="white-bg">
+
+                <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+                    <div class="h3">COMPANIES LIST</div>
+                    <div class="pv-16">
+
+
+                        <md-button class="md-icon-button" ng-disabled="!currentUser.is_staff" ng-click="vm.openCompanyDialog($event)" aria-label="ADD COMPANY">
+                            <md-icon md-font-icon="icon-plus"></md-icon>
+                        </md-button>
+
+                    </div>
+                </div>
+
+                <div layout="row" layout-margin layout-wrap layout-align="center center">
+
+
+                    <md-card flex-xs flex-gt-xs="100" ng-repeat="item in vm.companies">
+                        <md-card-header>
+                            <!--<md-card-avatar>
+                                <img src="img/logo.svg"/>
+                            </md-card-avatar>-->
+                        <md-card-header-text>
+                            <span class="md-title">{{item.name || item.companies__name}}</span>
+                            <span class="md-subhead">DATE ADDED: {{item.date_added|date:'dd-MMM-yyyy' || item.companies__date_added|date:'dd-MMM-yyyy'}}</span>
+                        </md-card-header-text>
+
+                        <!--<md-card-actions layout="row" layout-align="start center">
+                            <md-card-icon-actions>
+
+                            </md-card-icon-actions>
+
+                            <md-button class="md-icon-button" ng-click="$mdOpenMenu()"
+                                       aria-label="more">
+                                <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                            </md-button>
+
+                        </md-card-actions>-->
+
+                        <md-card-actions layout="row" layout-align="end center">
+                            <md-card-icon-actions>
+
+                            </md-card-icon-actions>
+
+                            <md-menu>
+                                <md-button class="md-icon-button" ng-click="$mdOpenMenu()"
+                                           aria-label="more">
+                                    <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                                </md-button>
+
+                                <md-menu-content width="3">
+
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.openCommentsDialog($event,'', item.id || item.companies__id)" aria-label="Add Comment">
+                                            Add Comment
+                                        </md-button>
+                                    </md-menu-item>
+
+                                    <md-menu-item ng-show="{{currentUser.is_staff}}">
+                                        <md-button ng-click="vm.openCompanyDialog($event, item)" aria-label="More information">
+                                            Edit/Delete
+                                        </md-button>
+                                    </md-menu-item>
+
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.showCompanyComments($event, item)" aria-label="Show Company's Comments">
+                                            Show Company's Comments
+                                        </md-button>
+                                    </md-menu-item>
+
+                                    <md-menu-item>
+                                        <md-button ng-click="vm.showCompanyEmployees($event, item)" aria-label="Show Employees">
+                                            Show Employees
+                                        </md-button>
+                                    </md-menu-item>
+
+
+
+
+
+                                </md-menu-content>
+
+                            </md-menu>
+
+                        </md-card-actions>
+
+                        </md-card-header>
+                        <img ng-src="{{downloadSource}}{{item.logo || item.companies__logo}}" style="max-width:250px;max-height:220px;" class="md-card-image" alt="Company Image">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="secondary">{{item.tagline || item.companies__tagline}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                    <md-card-content>
+                        <p>
+                            {{item.description || item.companies__description}}
+                        </p>
+                    </md-card-content>
+
+                    <md-card-actions layout="row" layout-align="start center">
+                        <md-card-icon-actions>
+
+                            <md-button class="md-icon-button" ng-click="vm.openCommentsDialog($event,'', item.id || item.companies__id)"
+                                       aria-label="more">
+                                <md-icon md-font-icon="icon-comment"></md-icon>
+                            </md-button>
+
+                            <md-button ng-show="{{currentUser.is_staff}}" class="md-icon-button" ng-click="vm.openCompanyDialog($event, item)"
+                                       aria-label="more">
+                                <md-icon md-font-icon="icon-pencil"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button" aria-label="Add Comment">
+                                <md-icon md-svg-icon="img/icons/favorite.svg"></md-icon>
+                            </md-button>
+
+                            <md-button class="md-icon-button" aria-label="Share">
+                                <md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>
+                            </md-button>
+                        </md-card-icon-actions>
+                        <md-button ng-click="vm.showCompanyEmployees($event, item)" aria-label="Show Employees">
+                            Show Employees
+                        </md-button>
+                        <md-button ng-click="vm.showCompanyComments($event, item)" aria-label="Show Comments">
+                            Show Comments
+                        </md-button>
+
+                    </md-card-actions>
+
+                    </md-card>
+
+                </div>
+
+
+
+
+
+
+            </ms-widget-front>
+            <!-- / Front -->
+
+        </ms-widget>
+        <!-- / WIDGET 6 -->
+
+        <!-- WIDGET 7 -->
+        <ms-widget layout="column" flex="100" flex-gt-sm="50">
+
+            <!-- Front -->
+            <ms-widget-front class="white-bg">
+
+                <div class="ph-16 border-bottom" layout="row" layout-align="space-between center">
+                    <div class="h3" ng-show="vm.toggleCompanyEmployeesAndComments">{{vm.showCompany}} Employees</div>
+                    <div class="h3" ng-hide="vm.toggleCompanyEmployeesAndComments">{{vm.showCompany}} Comments</div>
+
+                    <div class="pv-16">
+
+
+                        <md-button ng-hide="vm.toggleCompanyEmployeesAndComments" class="md-warn md-raised"  ng-disabled="vm.showCompanyIdForDialog == ''" ng-click="vm.openCommentsDialog($event,'', vm.showCompanyIdForDialog)" aria-label="ADD COMMENT"
+                                   translate="TASK.ADD_COMMENT" translate-attr-aria-label="TASK.ADD_COMMENT">
+                            ADD COMMENT
+                        </md-button>
+
+                        <md-button ng-show="vm.toggleCompanyEmployeesAndComments" ng-disabled="!currentUser.is_staff" class="md-warn md-raised" ng-click="vm.openEmployeeDialog($event)" aria-label="ADD USER">
+                            ADD USER
+                        </md-button>
+
+
+                    </div>
+
+                </div>
+
+
+                <div class="p-16" ng-hide="vm.toggleCompanyEmployeesAndComments">
+
+                    <div class="todo-item" md-ink-ripple layout="row" layout-align="start center"
+                         ng-repeat="comment in vm.comments | orderBy:date-added track by $index"><!--ng-click="vm.openCommentsDialog($event, comment)"-->
+
+                        <div class="handle" ng-click="vm.preventDefault($event)">
+                            <md-icon md-font-icon="icon-drag-vertical" class="icon"></md-icon>
+                        </div>
+
+
+
+                        <div layout="row" layout-align="start center" flex>
+
+                            <div class="info" flex>
+                                <div class="title">
+                                    {{comment.customerFirstname}}&nbsp;{{comment.customerLastname}}
+                                </div>
+
+                                <div class="notes">
+                                    {{comment.comment}}
+                                </div>
+
+                                <div class="tags" layout="row" layout-align="start center">
+
+                                    <div class="tag" layout="row" layout-align="end center">
+                                        <div class="tag-color" style="background-color: rgb(244, 67, 54);" ng-style="{'background-color': green}"></div>
+                                        <div class="tag-label">{{comment.company__name}}</div>
+                                    </div>
+
+                                </div>
+
+                                <div class="tags" layout="row" layout-align="end center">
+                                    <div class="tag" layout="row" layout-align="end center">
+                                        <div class="tag-color" style="background-color: rgb(0, 145, 234);" ng-style="{'background-color':'blue' }"></div>
+                                        <div class="tag-label">{{comment.date_added|date:'dd-MMM-yyyy hh:mm:a' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="buttons" layout="row" layout-align="start center">
+
+                                <md-menu>
+                                    <md-button class="md-icon-button" aria-label="More" translate
+                                               translate-attr-aria-label="TASK.MORE">
+                                        <md-icon md-font-icon="icon-dots-vertical" ng-click="$mdOpenMenu($event)"></md-icon>
+                                    </md-button>
+                                </md-menu>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="p-16" ng-show="vm.toggleCompanyEmployeesAndComments" layout="row" layout-align="space-between center" ng-repeat="user in vm.companyEmployees">
+
+                    <div>
+                        <div class="h3">{{user.user__first_name}}&nbsp;{{user.user__last_name}}</div>
+                        <div>
+                            <span class="secondary-text">{{user.user__username}}</span>
+                            <span class="secondary-text">Date Added:</span>
+                            <span ng-if="user.user__date_joined"> {{user.user__date_joined|date:'dd-MMM-yyyy'}}</span>
+                        </div>
+                    </div>
+
+
+                    <md-menu>
+                        <md-button class="md-icon-button" ng-click="$mdOpenMenu()"
+                                   aria-label="more">
+                            <md-icon md-font-icon="icon-dots-vertical"></md-icon>
+                        </md-button>
+
+                    </md-menu>
+
+                </div>
+
+
+
+            </ms-widget-front>
+            <!-- / Front -->
+
+
+        </ms-widget>
+        <!-- / WIDGET 7 -->
+
+    </div>
+    <!-- / WIDGET GROUP -->
+
+</div>
+<!-- / TASK LIST ITEMS -->

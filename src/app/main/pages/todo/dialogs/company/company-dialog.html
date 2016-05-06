@@ -1,0 +1,153 @@
+<md-dialog class="task-dialog" aria-label="Create Company" ng-init="downloadSource = vm.streamingSource">
+
+
+    <!--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES-->
+
+
+
+    <form name="companyForm" class="md-inline-form" novalidate>
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+                    <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ms-scroll>
+
+            <fieldset class="text-center">
+
+                <div class="clearfix">
+                    <legend>lOGO PREVIEW</legend>
+                    <div class="clearfix">
+                        <img ng-if="vm.newCompany" ng-src="logo" ngf-background="vm.companyData.logo" ngf-thumbnail="vm.companyData.logo || '/thumb.jpg'" style="max-height: 300px;max-width: 400px;">
+                        <img ng-if="!vm.newCompany" src="{{downloadSource}}{{vm.companyData.logo}}" ng-src="{{downloadSource}}{{vm.companyData.logo}}" ngf-background="{{downloadSource}}{{vm.companyData.logo}}" ngf-thumbnail="{{downloadSource}}{{vm.companyData.logo}} || '/thumb.jpg'" style="max-height: 300px;max-width: 400px;">
+
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+            <md-input-container class="md-block">
+                <input style="display:none;" id="image-file-input" class="form-control" type="file" ngf-select ng-model="vm.companyData.logo" name="logo" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" ngf-min-height="100" required/>
+            </md-input-container>
+
+
+
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.COMPANY_NAME">Company Name</label>
+                <input name="name" ng-model="vm.companyData.name" autocomplete="off" md-minlength="3" md-maxlength="20" required>
+
+                <div ng-messages="companyForm.name.$error" ng-show="companyForm.name.$touched" role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.COMPANY_NAME_REQUIRED">Company name field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.COMPANY_NAME_MINLENGTH">Company name can't be less than 3 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.COMPANY_NAME_MAXLENGTH">Company name can't be longer than 20 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.COMPANY_NAME_PATTERN">Company name must be 3-20 letters.</span>
+                    </div>
+                </div>
+
+
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.COMPANY_TAGLINE">Company Tagline</label>
+                <input name="tagline" ng-model="vm.companyData.tagline" autocomplete="off" md-minlength="5" md-maxlength="30" required>
+
+                <div ng-messages="companyForm.tagline.$error" ng-show="companyForm.tagline.$touched" role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.TAGLINE_REQUIRED">Tagline field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.TAGLINE_MINLENGTH">Tagline can't be less than 4 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.TAGLINE_MAXLENGTH">Tagline can't be longer than 30 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.TAGLINE_PATTERN">Tagline must be 4-20 letters.</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.COMPANY_DESCRIPTION">Company Description</label>
+                <input name="description" ng-model="vm.companyData.description" autocomplete="off" md-minlength="10" md-maxlength="50" required>
+
+                <div ng-messages="companyForm.description.$error" ng-show="companyForm.description.$touched" role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.DESCRIPTION_REQUIRED">Description field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.DESCRIPTION_MINLENGTH">Description can't be less than 10 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.DESCRIPTION_MAXLENGTH">Description can't be longer than 50 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.DESCRIPTION_PATTERN">Description must be 5-20 letters.</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+
+                <md-button type="submit" ng-if="!vm.newCompany" ng-click="vm.saveCompany()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="companyForm.$invalid || companyForm.$pristine"
+                           aria-label="SAVE COMPANY" translate="TASK.SAVE_COMPANY" translate-attr-aria-label="TASK.SAVE_COMPANY">
+                    SAVE COMPANY
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newCompany" ng-click="vm.addNewCompany()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="companyForm.$invalid || companyForm.$pristine"
+                           aria-label="Add Company" translate="TASK.ADD_COMPANY" translate-attr-aria-label="TASK.ADD_COMPANY">
+                    ADD COMPANY
+                </md-button>
+
+
+                <!--<label class="md-raised md-button md-icon-button" md-ink-ripple for="image-file-input">
+                    <md-icon md-font-icon="icon-paperclip"></md-icon>
+                </label>-->
+
+                <label class="md-raised md-accent md-button md-icon-button" ng-if="vm.newCompany" md-ink-ripple for="image-file-input">
+                    <md-icon md-font-icon="icon-paperclip"></md-icon>
+                </label>
+
+            </div>
+
+            <div layout="row">
+
+                <md-button class="md-icon-button" ng-if="!vm.newCompany" ng-click="vm.deleteCompany($event)" aria-label="Delete" translate
+                           translate-attr-aria-label="TASK.DELETE">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span translate="TASK.DELETE">DELETE</span></md-tooltip>
+                </md-button>
+
+            </div>
+        </md-dialog-actions>
+    </form>
+
+
+
+
+</md-dialog>

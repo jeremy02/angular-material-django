@@ -1,0 +1,163 @@
+<md-dialog class="task-dialog" aria-label="Upload File">
+
+
+    <!--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES-->
+
+
+
+    <form name="commentForm" class="md-inline-form" novalidate>
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+                    <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ms-scroll>
+
+            <!--<fieldset class="text-center" ng-hide="commentForm.$invalid">
+
+                <div class="clearfix">
+                    <legend>lOGO PREVIEW</legend>
+                    <div class="clearfix">
+                        <img ng-src="companyLogoFile" ngf-background="vm.comment.companyLogoFile" ngf-thumbnail="vm.comment.companyLogoFile || '/thumb.jpg'" style="max-height: 300px;max-width: 400px;">
+                    </div>
+                </div>
+
+
+            </fieldset>-->
+
+            <!--<input name="id" ng-model="vm.comment.id" ng-value="{{vm.comment.id}}" autocomplete="off">
+
+            <br/>
+
+            <input name="company__id" ng-model="vm.comment.company__id" ng-value="{{vm.company || vm.comment.company__id}}" autocomplete="off">-->
+
+            <md-input-container class="md-block">
+                <label translate="TASK.FIRST_NAME">First Name</label>
+
+                <input name="customerFirstname" ng-model="vm.comment.customerFirstname" autocomplete="off" md-minlength="3" md-maxlength="10" ng-pattern="/^[A-Za-z]{3,10}$/" required>
+
+                <div ng-messages="commentForm.customerFirstname.$error" ng-show="commentForm.customerFirstname.$touched" role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.FIRST_NAME_REQUIRED">Firstname field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.FIRST_NAME_MINLENGTH">Firstname can't be less than 3 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.FIRST_NAME_MAXLENGTH">Firstname can't be longer than 10 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.FIRST_NAME_PATTERN">Firstname must be 3-10 letters.</span>
+                    </div>
+                </div>
+
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.LAST_NAME">Last Name</label>
+                <input name="customerLastname" ng-model="vm.comment.customerLastname" autocomplete="off" md-minlength="3" md-maxlength="10" ng-pattern="/^[A-Za-z]{3,10}$/" required>
+
+                <div ng-messages="commentForm.customerLastname.$error" ng-show="commentForm.customerLastname.$touched" role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.LAST_NAME_REQUIRED">Lastname field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.LAST_NAME_MINLENGTH">Lastname can't be less than 3 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.LAST_NAME_MAXLENGTH">Lastname can't be longer than 10 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.LAST_NAME_PATTERN">Lastname must be 3-10 letters.</span>
+                    </div>
+                </div>
+
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.PHONE_NUMBER">Phone Number</label>
+                <input name="customerPhone" ng-model="vm.comment.customerPhone" autocomplete="off" ng-pattern="/^0(7)[0-9]{8}$/" required>
+
+                <div ng-messages="commentForm.customerPhone.$error" ng-show="commentForm.customerLastname.$touched" role="alert">
+
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.PHONE_NUMBER_REQUIRED">Phone number field is required</span>
+                    </div>
+
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.PHONE_NUMBER_PATTERN">Phone number is not valid.</span>
+                    </div>
+
+                </div>
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.COMMENT">Comment</label>
+                <input name="comment" ng-model="vm.comment.comment" autocomplete="off" md-minlength="3" required>
+
+                <div ng-messages="commentForm.comment.$error" ng-show="commentForm.comment.$touched" role="alert">
+
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.COMMENT_REQUIRED">Comment field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.COMMENT_MINLENGTH">Comment can't be less than 3 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.COMMENT_MAXLENGTH">Comment can't be longer than 30 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.COMMENT_PATTERN">Comment must be 3-20 letters.</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+
+                <md-button type="submit" ng-if="!vm.newComment" ng-click="vm.saveComment()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="commentForm.$invalid || commentForm.$pristine"
+                           aria-label="SAVE COMMENT" translate="TASK.SAVE_COMMENT" translate-attr-aria-label="TASK.SAVE_COMMENT">
+                    SAVE COMMENT
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newComment" ng-click="vm.addNewComment()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="commentForm.$invalid || commentForm.$pristine"
+                           aria-label="Add Comment" translate="TASK.ADD_COMMENT" translate-attr-aria-label="TASK.ADD_COMMENT">
+                    ADD Comment
+                </md-button>
+
+                <!--<label class="md-raised md-button md-icon-button" md-ink-ripple for="image-file-input">
+                    <md-icon md-font-icon="icon-file-image-box"></md-icon>
+                </label>-->    
+                
+            </div>
+
+            <div layout="row">
+                
+                    <md-button class="md-icon-button" ng-if="!vm.newComment" ng-click="vm.deleteComment($event)" aria-label="Delete" translate
+                               translate-attr-aria-label="TASK.DELETE">
+                        <md-icon md-font-icon="icon-delete"></md-icon>
+                        <md-tooltip><span translate="TASK.DELETE">DELETE</span></md-tooltip>
+                    </md-button>
+                
+            </div>
+        </md-dialog-actions>
+    </form>
+
+
+
+
+</md-dialog>

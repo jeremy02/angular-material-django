@@ -1,0 +1,97 @@
+{
+    "TASK": {
+        "TOGGLE_SIDENAV": "Toggle sidenav",
+        "SEARCH": "Search for a company",
+        "BIG_TITLE":"FFS",
+        "FILTER": "Filter",
+        "ORDER": "Order",
+        "START_DATE": "Start Date",
+        "DUE_DATE": "Due Date",
+        "MANUAL": "Manual",
+        "TAG": "Tag",
+        "TITLE": "Title",
+        "DELETE_ATTACHMENT": "Delete attachment",
+        "SAVE": "SAVE",
+        "ATTACH_FILE": "Attach file",
+        "INSERT_PICTURE": "Insert picture",
+        "DELETE": "Delete",
+        "ERRORS": {
+
+            "COMPANY_NAME_REQUIRED":"Company name field is required",
+            "COMPANY_NAME_MINLENGTH":">Company name can't be less than 3 characters.",
+            "COMPANY_NAME_MAXLENGTH":"Company name can't be longer than 20 characters.",
+            "COMPANY_NAME_PATTERN":"Company name must be 3-20 letters.",
+
+
+            "TAGLINE_REQUIRED":"Tagline field is required",
+            "TAGLINE_MINLENGTH":"Tagline can't be less than 5 characters.",
+            "TAGLINE_MAXLENGTH":"Tagline can't be longer than 30 characters.",
+            "TAGLINE_PATTERN":"Tagline must be 4-20 letters.",
+
+            "DESCRIPTION_REQUIRED":"Description field is required",
+            "DESCRIPTION_MINLENGTH":"Description can't be less than 10 characters.",
+            "DESCRIPTION_MAXLENGTH":"Description can't be longer than 100 characters.",
+            "DESCRIPTION_PATTERN":"Description must be 5-20 letters.",
+
+            "LOGO_REQUIRED":"Logo field is required",
+
+            "FIRST_NAME_REQUIRED":"Firstname field is required",
+            "FIRST_NAME_MINLENGTH":"Firstname can't be less than 3 characters.",
+            "FIRST_NAME_MAXLENGTH":"Firstname can't be longer than 10 characters.",
+            "FIRST_NAME_PATTERN":"Firstname must be 2-10 letters.",
+
+            "LAST_NAME_REQUIRED":"Lastname field is required",
+            "LAST_NAME_MINLENGTH":"Lastname can't be less than 3 characters.",
+            "LAST_NAME_MAXLENGTH":"Lastname can't be longer than 10 characters.",
+            "LAST_NAME_PATTERN":"Lastname must be 3-10 letters.",
+
+            "USERNAME_REQUIRED": "Username field is required",
+            "USERNAME_MINLENGTH":"Username can't be less than 6 characters.",
+            "USERNAME_MAXLENGTH":"Username can't be longer than 10 characters.",
+            "USERNAME_PATTERN":"Username can be (6-10) characters/characters & numbers.",
+
+            "PASSWORD_REQUIRED": "Password field is required",
+            "PASSWORD_MINLENGTH":"Password can't be less than 4 characters.",
+            "PASSWORD_MAXLENGTH":"Password can't be longer than 10 characters.",
+            "PASSWORD_PATTERN":"Password can be (4-10) characters/characters & numbers.",
+
+            "COMMENT_REQUIRED":"Comment field is required",
+            "COMMENT_MINLENGTH":"Comment can't be less than 3 characters.",
+            "COMMENT_MAXLENGTH":"Comment can't be longer than 30 characters.",
+            "COMMENT_PATTERN":"Comment must be 3-20 letters.",
+
+            "PHONE_NUMBER_REQUIRED":"Phone number field is required",
+            "PHONE_NUMBER_PATTERN":"Phone number is not valid."
+        },
+
+        "EMPLOYEES":"Employees",
+        "COMPANIES":"Companies",
+        "MY_COMPANIES":"My Companies",
+        "COMMENTS":"Comments",
+
+        "ADD_COMPANY":"ADD COMPANY",
+        "COMPANY_NAME":"Company Name",
+        "COMPANY_TAGLINE":"Company Tagline",
+        "COMPANY_DESCRIPTION":"Company Description",
+        "COMPANY_LOGO":"Company Logo",
+        "SAVE_COMPANY": "SAVE",
+        "ADD_COMPANY": "ADD COMPANY",
+
+        "SAVE_COMMENT": "SAVE",
+        "ADD_COMMENT": "ADD COMMENT",
+        "ADD_COMPANY":"ADD COMPANY",
+
+        "FIRST_NAME":"First Name",
+        "LAST_NAME":"Last Name",
+        "USERNAME":"Username",
+        "PASSWORD":"Password",
+        "PHONE_NUMBER":"Phone Number",
+        "COMMENT":"Comment",
+
+
+        "ADD_EMPLOYEE_DIALOG":"Add Employee",
+        "SAVE_EMPLOYEE": "SAVE Employee",
+        "ADD_EMPLOYEE": "ADD Employee",
+        "ASSIGN_EMPLOYEE":"ASSIGN EMPLOYEE"
+    }
+}

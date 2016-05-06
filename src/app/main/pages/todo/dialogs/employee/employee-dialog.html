@@ -1,0 +1,158 @@
+<md-dialog class="task-dialog" aria-label="Upload File">
+
+
+    <!--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES--WORKING WITH SHARINGG FILES-->
+
+
+
+    <form name="employeeForm" class="md-inline-form" novalidate>
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+                    <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content ms-scroll>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.FIRST_NAME">First Name</label>
+                <input name="first_name" ng-model="vm.employeeData.first_name" md-minlength="3" md-maxlength="10" ng-pattern="/^[A-Za-z]{3,10}$/" required autocomplete="off">
+
+
+                <div ng-messages="employeeForm.first_name.$error" ng-show="employeeForm.first_name.$touched"
+                     role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.FIRST_NAME_REQUIRED">Firstname field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.FIRST_NAME_MINLENGTH">Firstname can't be less than 3 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.FIRST_NAME_MAXLENGTH">Firstname can't be longer than 10 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.FIRST_NAME_PATTERN">Firstname must be 3-10 letters.</span>
+                    </div>
+                </div>
+
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.LAST_NAME">Last Name</label>
+                <input name="last_name" ng-model="vm.employeeData.last_name" md-minlength="3" md-maxlength="10" ng-pattern="/^[A-Za-z]{3,10}$/" autocomplete="off" required>
+
+                <div ng-messages="employeeForm.last_name.$error" ng-show="employeeForm.last_name.$touched"
+                     role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.LAST_NAME_REQUIRED">Lastname field is required</span>
+                    </div>
+                    <div ng-message="md-minlength">
+                        <span translate="TASK.ERRORS.LAST_NAME_MINLENGTH">Lastname can't be less than 3 characters.</span>
+                    </div>
+                    <div ng-message="md-maxlength">
+                        <span translate="TASK.ERRORS.LAST_NAME_MAXLENGTH">Lastname can't be longer than 10 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.LAST_NAME_PATTERN">Lastname must be 3-10 letters.</span>
+                    </div>
+                </div>
+
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.USERNAME">Username</label>
+                <input name="username" ng-model="vm.employeeData.username" autocomplete="off" md-minlength="6" md-maxlength="10" ng-pattern="/^[A-Za-z0-9_]{6,20}$/" required>
+
+                <div ng-messages="employeeForm.username.$error" ng-show="employeeForm.username.$touched"
+                     role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.USERNAME_REQUIRED">Username field is required</span>
+                    </div>
+                    <div ng-message="minlength">
+                        <span translate="TASK.ERRORS.USERNAME_MINLENGTH">Username can't be less than 6 characters.</span>
+                    </div>
+                    <div ng-message="maxlength">
+                        <span translate="TASK.ERRORS.USERNAME_MAXLENGTH">Username can't be longer than 10 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.USERNAME_PATTERN">Username can be (6-10) alphabets and numbers.No special characters.</span>
+                    </div>
+                </div>
+
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label translate="TASK.PASSWORD">Password</label>
+                <input name="password" type="password" ng-model="vm.employeeData.password" autocomplete="off" md-minlength="4" md-maxlength="10" ng-pattern="/^[A-Za-z0-9_]{4,20}$/" required>
+
+                <div ng-messages="employeeForm.password.$error" ng-show="employeeForm.password.$touched"
+                     role="alert">
+                    <div ng-message="required">
+                        <span translate="TASK.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
+                    </div>
+                    <div ng-message="minlength">
+                        <span translate="TASK.ERRORS.PASSWORD_MINLENGTH">Password can't be less than 4 characters.</span>
+                    </div>
+                    <div ng-message="maxlength">
+                        <span translate="TASK.ERRORS.PASSWORD_MAXLENGTH">Password can't be longer than 10 characters.</span>
+                    </div>
+                    <div ng-message="pattern">
+                        <span translate="TASK.ERRORS.PASSWORD_PATTERN">Password can be (4-10) alphabets and numbers.No special characters.</span>
+                    </div>
+                </div>
+
+
+            </md-input-container>
+
+
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="space-between center">
+
+            <div layout="row" layout-align="start center">
+
+                <md-button type="submit" ng-if="!vm.newEmployee" ng-click="vm.saveEmployee()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="employeeForm.$invalid || employeeForm.$pristine"
+                           aria-label="SAVE EMPLOYEE" translate="TASK.SAVE_EMPLOYEE" translate-attr-aria-label="TASK.SAVE_EMPLOYEE">
+                    SAVE EMPLOYEE
+                </md-button>
+
+
+                <md-button type="submit" ng-if="vm.newEmployee" ng-click="vm.addNewEmployee()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="employeeForm.$invalid || employeeForm.$pristine"
+                           aria-label="Add Employee" translate="TASK.ADD_EMPLOYEE" translate-attr-aria-label="TASK.ADD_EMPLOYEE">
+                    ADD EMPLOYEE
+                </md-button>
+
+                  
+                
+            </div>
+
+            <div layout="row">
+                    
+                <md-button class="md-icon-button" ng-if="!vm.newEmployee" ng-click="vm.deleteEmployee($event)" aria-label="Delete" translate
+                           translate-attr-aria-label="TASK.DELETE">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span translate="TASK.DELETE">DELETE</span></md-tooltip>
+                </md-button>
+
+            </div>
+
+            
+        </md-dialog-actions>
+    </form>
+
+
+
+
+</md-dialog>

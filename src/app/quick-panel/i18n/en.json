@@ -1,0 +1,57 @@
+{
+    "QUICKPANEL": {
+        "TODAY": "TODAY",
+        "CHAT": "CHAT",
+        "ACTIVITY": "ACTIVITY",
+        "FILEMANAGER": "FILE MANAGER",
+        "FRIENDS": "Friends",
+        "APP_SERVERS": "Application Servers",
+        "USER_STATS": "User Stats",
+        "EVENTS": "Events",
+        "NOTES": "Notes",
+        "QUICK_SETTINGS": "Quick Settings",
+        "NOTIFICATIONS": "Notifications",
+        "CLOUD_SYNC": "Cloud Sync",
+        "RETRO_THRUSTERS": "Retro Thrusters",
+        "RECENT": "Recent",
+        "START_NEW_CHAT": "Start New Chat",
+        "BACK": "Back",
+        "BACKTOCLASSCHAT": "Back to Class",
+        "CALL": "Call",
+        "MORE": "More",
+        "SEND_MESSAGE": "Send message",
+        "REPLY_PLACEHOLDER": "Type and hit enter to send message",
+
+
+        "FILE_UPLOADS":"File Uploads",
+        "INSERT_PICTURE": "Insert picture",
+        "ATTACH_FILE": "Attach file",
+        "DELETE_ATTACHMENT": "Delete attachment",
+        "UPLOAD_IMAGE":"SEND",
+        "SAVE": "SAVE",
+        "CAPTION":"Add Caption",
+        "CAPTION2":"Add Caption",
+        "CLOSE": "Close",
+        "DELETE": "Delete",
+        "ERRORS": {
+            "CAPTION_REQUIRED": "Caption field is required"
+        },
+
+
+
+
+        "CLASS_FILE_SHARE":"File Sharing",
+        "ADD_FILE":"ADD_FILE",
+
+        "POST": "POST",
+        "TYPE_TIMELINE_POST": "posted on the class timeline",
+        "TYPE_TIMELINE_IMAGE_POST": "shared an image with the class",
+        "TYPE_TIMELINE_VIDEO_POST": "shared a video with the class",
+        "TYPE_TIMELINE_AUDIO_POST": "shared an audio file with the class",
+        "TYPE_TIMELINE_OTHERFILE_POST": "shared a file with the class",
+        "TYPE_SOMETHING": "shared something with you",
+        "TYPE_VIDEO": "shared a video with you",
+        "TYPE_ARTICLE": "shared an article with you"
+
+    }
+}

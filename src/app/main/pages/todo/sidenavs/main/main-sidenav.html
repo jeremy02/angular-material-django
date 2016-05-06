@@ -1,0 +1,61 @@
+<!-- SIDENAV HEADER -->
+<div class="header" layout="column" layout-align="space-between">
+
+    <div class="logo" layout="row" layout-align="start center">
+        <span class="logo-icon">
+            <md-icon md-font-icon="icon-checkbox-marked" class="s24"></md-icon>
+        </span>
+        <span class="logo-text" translate="TASK.BIG_TITLE">FFS</span>
+    </div>
+
+</div>
+<!-- / SIDENAV HEADER -->
+
+<!-- SIDENAV CONTENT -->
+<md-content class="content" flex ms-scroll>
+
+
+
+    <div class="navigation-simple" layout="column">
+        
+        <md-button class="item" aria-label="Comments" translate translate-attr-aria-
+        label="TASK.COMMENTS"
+                   ng-class="{'selected':vm.showAllTasks}" ng-click="vm.resetFilters()">
+            <div layout="row" layout-align="start center">
+                <md-icon md-font-icon="icon-comment-check-outline" class="s16"></md-icon>
+                <span class="title" translate="TASK.COMMENTS">Comments</span>
+            </div>
+        </md-button>
+
+        <md-button ng-show="{{currentUser.is_staff}}" class="item" aria-label="Companies" translate translate-attr-aria-label="TASK.COMPANIES"
+                   ng-click="vm.toggleFilterWithEmpty('company')"
+                   ng-class="{'selected':vm.taskFilters.starred}">
+            <md-icon md-font-icon="icon-engine" class="s16"></md-icon>
+            <span class="title" translate="TASK.COMPANIES">Companies</span>
+        </md-button>
+
+        <md-button ng-show="{{!currentUser.is_staff}}" class="item" aria-label="My Companies" translate translate-attr-aria-label="TASK.MY_COMPANIES"
+                   ng-click="vm.toggleFilterWithEmpty('my companies')"
+                   ng-class="{'selected':vm.taskFilters.starred}">
+            <md-icon md-font-icon="icon-engine-outline" class="s16"></md-icon>
+            <span class="title" translate="TASK.MY_COMPANIES">My Companies</span>
+        </md-button>
+
+
+
+        <md-button ng-show="{{currentUser.is_staff}}" class="item" aria-label="Employees" translate translate-attr-aria-label="TASK.EMPLOYEES"
+                   ng-click="vm.toggleFilterWithEmpty('employees')"
+                   ng-class="{'selected':vm.taskFilters.important}">
+            <md-icon md-font-icon="icon-account-circle" class="s16"></md-icon>
+            <span class="title" translate="TASK.EMPLOYEES">Employees</span>
+        </md-button>
+
+
+
+        
+
+        
+    </div>
+
+</md-content>
+<!-- / SIDENAV CONTENT -->

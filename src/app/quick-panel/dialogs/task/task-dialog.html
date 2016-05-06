@@ -1,0 +1,114 @@
+<md-dialog class="task-dialog" aria-label="Upload File">
+    <form name="chatFileUploadForm" class="md-inline-form" novalidate>
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between">
+                <span class="title">{{vm.title}}</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()">
+                    <md-icon md-font-icon="icon-close" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+
+
+
+
+        <md-dialog-content ms-scroll>
+
+            {{vm.dialogIndividualChatContact}}
+
+            <fieldset class="text-center" ng-hide="chatFileUploadForm.$invalid">
+
+                <div ng-hide="vm.fileUploadType !='Image'" class="clearfix">
+                    <legend>IMAGE PREVIEW</legend>
+                    <div class="clearfix">
+                        <img ng-src="chatImageFile" ngf-background="vm.classChatFile.chatImageFile" ngf-thumbnail="vm.classChatFile.chatImageFile || '/thumb.jpg'" style="max-height: 300px;max-width: 400px;">
+                    </div>
+                </div>
+
+                <div ng-hide="vm.fileUploadType !='Audio'" class="clearfix">
+                    <legend>AUDIO PREVIEW</legend>
+                    <div class="clearfix">
+                        <audio controls ngf-background="vm.classChatFile.chatImageFile" ngf-src="vm.classChatFile.chatImageFile"></audio>
+                    </div>
+                </div>
+
+                <div ng-hide="vm.fileUploadType !='Video'" class="clearfix">
+                    <legend>VIDEO PREVIEW</legend>
+                    <div class="clearfix">
+                        <video controls ngf-background="vm.classChatFile.chatImageFile" ngf-src="vm.classChatFile.chatImageFile" style="max-height: 300px;max-width: 400px;"></video>
+                    </div>
+                </div>
+
+
+            </fieldset>
+
+
+            <md-input-container class="md-block" ng-show="vm.fileUploadType =='Image'">
+                <input style="display:none;" id="image-file-input" class="form-control" type="file" ngf-select ng-model="vm.classChatFile.chatImageFile" name="chatImageFile" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="10MB" ngf-min-height="100" ng-required="vm.fileUploadType =='Image'"/>
+            </md-input-container>
+
+
+            <md-input-container class="md-block" ng-show="vm.fileUploadType =='Audio'">
+                <input style="display:none;" ng-show="vm.fileUploadType =='Audio'" id="audio-file-input" class="form-control" type="file" ngf-select ng-model="vm.classChatFile.chatImageFile" name="vm.classChatFile.chatImageFile" accept="audio/*" ngf-max-size="10MB" ngf-min-height="100"  ng-required="vm.fileUploadType =='Audio'"/>
+            </md-input-container>
+
+            <md-input-container class="md-block" ng-show="vm.fileUploadType =='Video'">
+                <input style="display:none;" ng-show="vm.fileUploadType =='Video'" id="video-file-input" class="form-control" type="file" ngf-select ng-model="vm.classChatFile.chatImageFile" name="vm.classChatFile.chatImageFile" ngf-pattern="'video/*'" accept="video/*" ngf-max-size="100MB" ngf-min-height="100" ngf-resize="{width: 100, height: 100}"  ng-required="vm.fileUploadType =='Video'"/>
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label translate="QUICKPANEL.CAPTION">Add Caption</label>
+                <input name="fileCaption" ng-model="vm.classChatFile.fileCaption" autocomplete="off">
+                <div ng-messages="chatFileUploadForm.fileCaption.$error" ng-show="chatFileUploadForm.fileCaption.$invalid" role="alert">
+                    <div ng-message="required">
+                        <span translate="QUICKPANEL.ERRORS.CAPTION_REQUIRED">Caption field is required</span>
+                    </div>
+                </div>
+            </md-input-container>
+
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+
+
+                <md-button type="submit" ng-if="!vm.newChatUploadFile" ng-click="vm.saveTask()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="chatFileUploadForm.$invalid || chatFileUploadForm.$pristine"
+                           aria-label="SAVE" translate="QUICKPANEL.SAVE" translate-attr-aria-label="QUICKPANEL.SAVE">
+                    SAVE
+                </md-button>
+
+                <md-button type="submit" ng-if="vm.newChatUploadFile" ng-click="vm.addNewChatFile()"
+                           class="send-button md-accent md-raised"
+                           ng-disabled="chatFileUploadForm.$invalid || chatFileUploadForm.$pristine"
+                           aria-label="Add Task" translate="QUICKPANEL.UPLOAD_IMAGE" translate-attr-aria-label="QUICKPANEL.UPLOAD_IMAGE">
+                    SEND
+                </md-button><!--ng-disabled="chatFileUploadForm.$invalid || chatFileUploadForm.$pristine"-->
+
+            </div>
+
+            <div layout="row">
+                <!--<md-button class="md-icon-button" ng-click="vm.deleteTask($event)" aria-label="Delete" translate
+                           translate-attr-aria-label="TODO.DELETE">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span translate="TODO.DELETE">DELETE</span></md-tooltip>
+                </md-button>-->
+
+                <label ng-show="vm.fileUploadType =='Image'" class="md-raised md-button md-icon-button" md-ink-ripple for="image-file-input">
+                    <md-icon md-font-icon="icon-file-image-box"></md-icon>
+                </label>
+
+                <label ng-show="vm.fileUploadType =='Audio'" class="md-raised md-button md-icon-button" md-ink-ripple for="audio-file-input">
+                    <md-icon md-font-icon="icon-file-music"></md-icon>
+                </label>
+
+                <label ng-show="vm.fileUploadType =='Video'" class="md-raised md-button md-icon-button" md-ink-ripple for="video-file-input">
+                    <md-icon md-font-icon="icon-file-video"></md-icon>
+                </label>
+
+            </div>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
