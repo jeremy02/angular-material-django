@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="MobiTill">
+    <meta name="keyword" content="MobiTill,Mobitill, Transport App">
+
+    <title>Flexx Comm</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+      <!--external css-->
+    <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style-responsive.css' %}" rel="stylesheet" />
+
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+	  <div id="login-page">
+	  	<div class="container">
+
+		      <form class="form-login" action="index.html" id="login-form">
+		        <h2 class="form-login-heading">sign in now</h2>
+		        <div class="login-wrap">
+                    <div id="login-form-messages">
+                    </div>
+                    {% csrf_token %}
+		            <input type="text" class="form-control" name="username" placeholder="Username" autocomplete="off" id="login-username" data-toggle="tooltip" data-placement="bottom" data-trigger="manual" autofocus>
+		            <br>
+		            <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="off" id="login-password" data-toggle="tooltip" data-placement="bottom" data-trigger="manual">
+		            <label class="checkbox">
+		                <span class="pull-right">
+		                    <a data-toggle="modal" href="index.html#myModal"> Forgot Password?</a>
+
+		                </span>
+		            </label>
+		            <button class="btn btn-theme03 btn-block" type="button" id="login-btn"><i class="fa fa-lock"></i> SIGN IN</button>
+		            <hr>
+
+		            <!--<div class="login-social-link centered">
+
+		            <!--<p>or you can sign in via your social network</p>
+		                <button class="btn btn-facebook" type="button" id="fblogin"><i class="fa fa-facebook"></i> Facebook</button>
+		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
+		            </div>
+                    <!--
+		            <div class="registration">
+		                Don't have an account yet?<br/>
+		                <a class="" id="registration" href="javascript:void(0);">
+		                    Create an account
+		                </a>
+		            </div>-->
+                    <div class="fbmessage"></div>
+
+		        </div>
+
+		          <!-- Modal -->
+		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+		              <div class="modal-dialog">
+		                  <div class="modal-content">
+		                      <div class="modal-header">
+		                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                          <h4 class="modal-title">Forgot Password ?</h4>
+		                      </div>
+		                      <div class="modal-body">
+		                          <p>Enter your e-mail address below to reset your password.</p>
+		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+
+		                      </div>
+		                      <div class="modal-footer">
+		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+		                          <button class="btn btn-theme" type="button">Submit</button>
+		                      </div>
+		                  </div>
+		              </div>
+		          </div>
+		          <!-- modal -->
+
+		      </form>
+
+
+	  	</div>
+	  </div>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script src="{% static 'js/custom.js' %}"></script>
+
+    <!--BACKSTRETCH-->
+    <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+    <script src="{% static 'js/jquery.backstretch.min.js' %}"></script>
+
+    <script>
+        $.backstretch("{% static 'img/login-bgBanner2.jpg' %}", {speed: 500});
+    </script>
+
+    <script type="text/javascript">
+        /*------------------------------------------HANDLED THE LOGGING AND REGISTRATION ----------------------------------------------*/
+    $('#login-btn').on('click', function () {
+        var loginUsername = $("#login-username").val();
+        var loginPassword = $("#login-password").val();
+
+        if (loginUsername == ""){
+            $('#login-form-messages').html('<div class="alert alert-dismissable alert-danger"><span>Please enter the username</span></div>');
+            $('#login-username').tooltip({
+                title: "Please enter the username."
+            }).tooltip("show");
+            return false;
+        }else if (loginPassword == ""){
+            $('#login-form-messages').html('<div class="alert alert-dismissable alert-danger"><span>Please enter the password</span></div>');
+            $('#login-password').tooltip({
+                title: "Please enter the password."
+            }).tooltip("show");
+            return false;
+        }else if( loginUsername != "" && loginPassword != ""){
+            $.ajax({
+                data: $("#login-form").serialize(),
+                type: 'POST',
+                dataType:'json',
+                url: '/flexcomms/login/',
+                success: function(response) {
+                    //alert(response['error_code']);
+                    if (response['error_code'] == 2){
+                        $('#login-form-messages').html('<div class="alert alert-dismissable alert-danger"><span>Sorry your account has been disabled.</span></div>');
+                    }
+                    //if the username and password is not empty but account has bad login details
+                    else if (response['error_code'] == 3){
+                        $('#login-form-messages').html('<div class="alert alert-dismissable alert-danger"><span>Invalid login details entered.Try again.</span></div>');
+                    }else if (response['error_code'] == 1){
+                        //empty the inputs in the login form
+                        $('#login-username').val('');
+                        $('#login-password').val('');
+                        $('#login-form-messages').html("<div class='alert alert-dismissable alert-info'>" +
+                                "<button type='button' class='close' data-dismiss='alert'>&times;</button>" +
+                                "<span>Welcome "+ loginUsername + ".</span></div>");
+
+                        //similar behavior as an HTTP redirect and redirect to the required url
+                        var delay = 1000; //Your delay in milliseconds
+                        setTimeout(function(){
+                            //window.location.replace(response);
+                            window.location = "/flexcomms/business/";
+                        }, delay);
+                    }
+                    //the error is out of the defined contexts
+                    else{
+
+                    }
+                    //$('#login-form-messages').fadeOut(5000);
+                },
+                error: function(response){
+                    $('#login-form-messages').html(response);
+                }
+            });
+        }else{
+
+        }
+
+    });
+
+    /*$('#fblogin').on('click', function () {
+            var ref = new Firebase("https://flexxlogin.firebaseio.com/");
+            ref.authWithOAuthPopup("facebook", function(error, authData) {
+            if (error) {
+                alert("Login Failed!");
+            } else {
+                var userId
+                var info = userId.split(':');
+                var provider = info[0];
+                var id = info[1];
+                if ( provider === 'facebook' ) {
+                  return 'https://graph.facebook.com/' + id + '/picture?type=square';
+                } else if ( provider === 'twitter' ) {
+                  return 'http://twitter.com/api/users/profile_image/' + id + '?size=normal';
+                }
+                //console.log("Authenticated successfully with payload:", authData);
+                $('.fbmessage').html('<img src="">');
+            }
+            });
+
+    });*/
+    /*------------------------------------------HANDLED THE LOGGING AND REGISTRATION ----------------------------------------------*/
+    </script>
+
+</body>
+</html>
