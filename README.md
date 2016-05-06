@@ -47,3 +47,60 @@ Here you can find a list of core libraries, design specifications and coding sta
     Angular Material is the primary library of the this web app. It's a set of AngularJS directives and services that implements Material Design Specifications and it's in active development by Google.
     
     We are using generator-gulp-angular package for quickly bootstrapping the application.
+    
+    
+#Prerequisites
+Yeoman generator for AngularJS with GulpJS
+Node.js
+Git
+Bower
+Gulp
+Django
+
+#Installation
+A. Installing Prerequisites
+    Download and install the latest Node.js from its web site.
+    Download and install the latest Git from its web site.
+    Open your favorite console application (Terminal, Command Prompt etc.), run the following command and wait for it to finish:
+    
+    npm install -g bower
+    
+    Run the following command and wait for it to finish:
+
+    npm install -g gulp
+
+Now you are ready to install the Fuse.
+B. Installing Fuse
+    Unzip the zip file that you have downloaded from this git. Inside the zip file, you will find the Skeleton Project (src.zip).
+    Extract the contents of the zip file (src.zip) into a folder that you will work within. For this documentation, we will refer that as "your work folder".
+    Open your favorite console application (Terminal, Command Prompt etc.), navigate into your work folder, run the following command and wait for it to finish:
+    
+    npm install
+
+    npm install
+
+    NB:This command will install all the required Node.js modules into the node_modules directory inside your work folder.You may have to delete the folder called node-modules.
+
+    Note: Installing Node.js packages may throw a lot of warnings and errors along the way. As long as the process finishes without any error notes such as "Killed", you will be fine.
+    Run the following command and wait it for to finish:
+
+    bower install / bower install --allow-root
+    NB:You may have to delete the folder called bower-components
+    This command will install all the required bower packages into the bower_components directory inside your work folder.
+
+    And now, you are ready to run the web app for the first time.
+
+C. Running Fuse
+
+    While still in your work folder, run the following command in the console application:
+    gulp serve
+
+    And that's it. Gulp will take care everything and start the web app and the django application inside the folder called flexcomm. Your default browser will be opened automatically, and you will be able to navigate through the web app.
+#to be done
+token authentication to replace the django login decorators
+implement actual logout of a user
+use of django rest framework instead of the DjangoJSONEncoder Django’s serialization framework which translates Django models into other formats(json/xml) to achieve a better REST API
+
+fOR NOW we are using PyJWT for JSON Web authentication nd its performing the encoding but we have to implementing the decoding of user uthentication data on the django back end.
+
+
