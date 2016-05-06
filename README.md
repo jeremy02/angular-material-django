@@ -1,15 +1,5 @@
 # angular-material-django
 This is a demo app that has been done using djngo framework for the back end and angular material on the front end.It simulates a commenting system for a company where the admin can create companies.creates employees and asssigns them to acompany,the employees create comments or collect comments fo\rom the company customers.
-
-#Customer Feedback Web App
-
-Basically a web-based prototype tool using Django web framework for collecting customer
-feedback. There are 3 user roles for this app: Admin, Employee, and Customer. Admins manage the
-system and view feedback. Employees use the app to solicit feedback from customers. Finally,
-customers use the app to give ratings and feedback.
-There are 2 main interfaces: an administrative back end (accessible to admins) and a front end
-(accessible to employees and customers)
-#User Stories
 #Back End
 As an admin, I can log into and out of the system
 When the admin logs in, they see links to manage employees and companies.
@@ -105,5 +95,7 @@ use of django rest framework instead of the DjangoJSONEncoder Django’s seriali
 fOR NOW we are using PyJWT for JSON Web authentication nd its performing the encoding but we have to implementing the decoding of user uthentication data on the django back end.
 
 Actual implementation of the delete buttons and functions.
+
+#DEMO LINK WILL BE PROVIDED SOON
 
 
